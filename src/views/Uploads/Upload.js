@@ -90,8 +90,8 @@ getPreviousOrders = () => {
 }
 
  render() {
-   var from = this.state.currentOrderNumber
-   var to  = this.state.currentOrderNumber + 100
+   var from = this.state.currentOrderNumber+1
+   var to  = this.state.currentOrderNumber + 101
    
  
 return (
