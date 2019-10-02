@@ -541,16 +541,16 @@ class Statistics extends Component {
     console.log(error);
   });
 
-  var date3 = [];
+  // var date3 = [];
        
-  for (i = 29; i >=  0; i--) {
-   var date = new Date();
-   date.setDate(date.getDate() - i);
-   var dateString2 = date.toISOString().split('T')[0];
-    this.state.data.labels.push(dateString2)
-   console.log("date",i,":",dateString2)
+  // for (i = 29; i >=  0; i--) {
+  //  var date = new Date();
+  //  date.setDate(date.getDate() - i);
+  //  var dateString2 = date.toISOString().split('T')[0];
+  //   this.state.data.labels.push(dateString2)
+  //  console.log("date",i,":",dateString2)
 
-  }
+  // }
    
    
 
@@ -664,10 +664,10 @@ class Statistics extends Component {
              var nameArr = date.split(',');
              // console.log('nameArr[0]',nameArr[0]);
      
-             var d = new Date(nameArr[0]);
-             d.setDate(d.getDate());
-             var dateString = d.toISOString().split('T')[0];
-             console.log('dateString:',dateString);
+            //  var d = new Date(nameArr[0]);
+            //  d.setDate(d.getDate());
+            //  var dateString = d.toISOString().split('T')[0];
+            //  console.log('dateString:',dateString);
 
 
 
