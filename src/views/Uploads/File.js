@@ -135,7 +135,7 @@ this.state = {
     value: 1,
     label: "1"
   },
-         users: [],
+      users: [],
       orders: [],
   status: {
     Created_At: new Date().toLocaleString(),
@@ -143,7 +143,12 @@ this.state = {
     Print_status: default_Print_status,
     Shipping_status: default_Shipping_status,
     Tracking_Number: default_Tracking_Number
+  },
+  customized_details :{
+    customized_email:"",
+    customized_mobile:""
   }
+ 
 
 
 }
@@ -315,8 +320,9 @@ this.state = {
     var r = window.confirm(" confirm to send email");
      if (r == true) {
       
-      axios.post(`http://localhost:5000/mail/${c_id}`,this.state.status)
-      .then((response) => {
+      axios.post(`http://localhost:5000/mail/quote/${c_id}`,this.state.customized_details)
+      
+.then((response) => {
         alert("email has been sent");
       })
       .catch(function (error) {
@@ -621,8 +627,17 @@ this.state = {
   }
   
 
+  inputChangerHandler=(propertyName) => (event) =>{
+    event.preventDefault()
+    console.log(event.target.value)
 
-
+    const { customized_details } = this.state;
+    const newCustomer = {
+      ...customized_details,
+      [propertyName]: event.target.value
+    };
+    this.setState({ customized_details: newCustomer });
+}
 
 
 
@@ -631,7 +646,7 @@ this.state = {
 
 
   render() {
-    console.log('orders:', this.state.orders);
+    console.log('this.state.customized_details', this.state.customized_details);
     console.log('c_id from file edit', c_id);
     console.log('Print_status', this.state.status.Print_status);
     // {this.state.orders.map(order => {
@@ -641,13 +656,13 @@ this.state = {
     return (
       <div className="animated fadeIn">
        {this.state.orders.map(order => {
-         if(order.email){
+         if(order.shipping_address){
         return <Row>
           <Col xs="12" lg="4">
             <h5>Email</h5>
-            {this.state.users.map(user => {
-              return <input key={user._id} type="text" defaultValue={user.email} style={{ width: '100%' }} />
-            })}
+            
+              <input key={order._id} type="text" defaultValue={order.email} style={{ width: '100%' }} />
+            
             <Row>
               <Col xs="12" lg="12">
 
@@ -815,7 +830,29 @@ this.state = {
             </div>
 
           </Col>
-        </Row>}})}
+        </Row>
+        }else{
+          return <div>
+                 <Row>
+                 <Col xs="12" lg="4">
+                  <h5>Email</h5>
+                  {this.state.orders.map(order => {
+                    return  <input  type="text" name="customized_email" onChange={this.inputChangerHandler('customized_email')} defaultValue="" style={{ width: '100%' }} />
+                  })}
+                 
+                 </Col>
+                 <Col xs="12" lg="4">
+                  <h5>Mobile</h5>
+                  {this.state.orders.map(order => {
+                    return  <input  type="text" name="customized_mobile" onChange={this.inputChangerHandler('customized_mobile')}  defaultValue="" style={{ width: '100%' }} />
+                  })}
+                 
+                 </Col>
+
+                </Row>
+                <br/><br/>
+            </div>
+        }})}
         <Row>
           <Col xs="12" lg="12">
             <Card>
