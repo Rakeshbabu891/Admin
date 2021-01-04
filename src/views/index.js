@@ -16,21 +16,27 @@ import {
   Tables,
   Tabs,
   Tooltips,
-} from './Base';
+} from "./Base";
 
-import { ButtonDropdowns, ButtonGroups, Buttons, BrandButtons } from './Buttons';
-import Charts from './Charts';
-import Dashboard from './Dashboard';
-import { CoreUIIcons, Flags, FontAwesome, SimpleLineIcons } from './Icons';
-import { Alerts, Badges, Modals } from './Notifications';
-import { Login, Page404, Page500, Register } from './Pages';
-import { UserLogin, UserRegister } from './Login';
-import { Colors, Typography } from './Theme';
-import Widgets from './Widgets';
-import {NewTable,FileEdit} from './Table';
-import {Upload,File} from './Uploads';
-import Statistics from './Statistics';
-import {Awaiting, Completed, Processing} from './Pending';
+import {
+  ButtonDropdowns,
+  ButtonGroups,
+  Buttons,
+  BrandButtons,
+} from "./Buttons";
+import Charts from "./Charts";
+import Dashboard from "./Dashboard";
+import { CoreUIIcons, Flags, FontAwesome, SimpleLineIcons } from "./Icons";
+import { Alerts, Badges, Modals } from "./Notifications";
+import { Login, Page404, Page500, Register } from "./Pages";
+import { UserLogin, UserRegister } from "./Login";
+import { Colors, Typography } from "./Theme";
+import Widgets from "./Widgets";
+import { NewTable, FileEdit } from "./Table";
+import { Upload, File } from "./Uploads";
+import Statistics from "./Statistics";
+import { Coupen, GenarateCoupen } from "./Coupens";
+import { Awaiting, Completed, Processing, FileError } from "./Pending";
 
 export {
   Badges,
@@ -77,6 +83,10 @@ export {
   Upload,
   File,
   Statistics,
-  Awaiting, Completed, Processing
+  Awaiting,
+  Completed,
+  FileError,
+  Processing,
+  Coupen,
+  GenarateCoupen,
 };
-

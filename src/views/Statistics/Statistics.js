@@ -1,7 +1,7 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import axios from 'axios';
- 
+import React, { Component, lazy, Suspense } from "react";
+import { Bar, Line } from "react-chartjs-2";
+import axios from "axios";
+
 import {
   Badge,
   Button,
@@ -21,36 +21,27 @@ import {
   Progress,
   Row,
   Table,
-} from 'reactstrap';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
+} from "reactstrap";
+import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
+import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
 
+import Widget03 from "../../views/Widgets/Widget03";
 
-const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
-
-const brandPrimary = getStyle('--primary')
-const brandSuccess = getStyle('--success')
-const brandInfo = getStyle('--info')
-const brandWarning = getStyle('--warning')
-const brandDanger = getStyle('--danger')
+const brandPrimary = getStyle("--primary");
+const brandSuccess = getStyle("--success");
+const brandInfo = getStyle("--info");
+const brandWarning = getStyle("--warning");
+const brandDanger = getStyle("--danger");
 // var Total = 0;
-
-
-
-
-
-
-
-
 
 // Card Chart 1
 const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: 'My First dataset',
+      label: "My First dataset",
       backgroundColor: brandPrimary,
-      borderColor: 'rgba(255,255,255,.55)',
+      borderColor: "rgba(255,255,255,.55)",
       data: [65, 59, 84, 84, 51, 55, 40],
     },
   ],
@@ -59,7 +50,7 @@ const cardChartData1 = {
 const cardChartOpts1 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -69,15 +60,15 @@ const cardChartOpts1 = {
     xAxes: [
       {
         gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent',
+          color: "transparent",
+          zeroLineColor: "transparent",
         },
         ticks: {
           fontSize: 2,
-          fontColor: 'transparent',
+          fontColor: "transparent",
         },
-
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
@@ -86,7 +77,8 @@ const cardChartOpts1 = {
           min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
           max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
         },
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -97,18 +89,17 @@ const cardChartOpts1 = {
       hitRadius: 10,
       hoverRadius: 4,
     },
-  }
-}
-
+  },
+};
 
 // Card Chart 2
 const cardChartData2 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: 'My First dataset',
+      label: "My First dataset",
       backgroundColor: brandInfo,
-      borderColor: 'rgba(255,255,255,.55)',
+      borderColor: "rgba(255,255,255,.55)",
       data: [1, 18, 9, 17, 34, 22, 11],
     },
   ],
@@ -117,7 +108,7 @@ const cardChartData2 = {
 const cardChartOpts2 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -127,15 +118,15 @@ const cardChartOpts2 = {
     xAxes: [
       {
         gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent',
+          color: "transparent",
+          zeroLineColor: "transparent",
         },
         ticks: {
           fontSize: 2,
-          fontColor: 'transparent',
+          fontColor: "transparent",
         },
-
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
@@ -144,7 +135,8 @@ const cardChartOpts2 = {
           min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
           max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5,
         },
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -161,12 +153,12 @@ const cardChartOpts2 = {
 
 // Card Chart 3
 const cardChartData3 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
+      label: "My First dataset",
+      backgroundColor: "rgba(255,255,255,.2)",
+      borderColor: "rgba(255,255,255,.55)",
       data: [78, 81, 80, 45, 34, 12, 40],
     },
   ],
@@ -175,7 +167,7 @@ const cardChartData3 = {
 const cardChartOpts3 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -185,11 +177,13 @@ const cardChartOpts3 = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -205,12 +199,12 @@ const cardChartOpts3 = {
 
 // Card Chart 4
 const cardChartData4 = {
-  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+  labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
   datasets: [
     {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderColor: 'transparent',
+      label: "My First dataset",
+      backgroundColor: "rgba(255,255,255,.3)",
+      borderColor: "transparent",
       data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98],
     },
   ],
@@ -219,7 +213,7 @@ const cardChartData4 = {
 const cardChartOpts4 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -230,31 +224,33 @@ const cardChartOpts4 = {
       {
         display: false,
         barPercentage: 0.6,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
 };
 
 // Social Box Chart
 const socialBoxData = [
-  { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
-  { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
-  { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
-  { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
+  { data: [65, 59, 84, 84, 51, 55, 40], label: "facebook" },
+  { data: [1, 13, 9, 17, 34, 41, 38], label: "twitter" },
+  { data: [78, 81, 80, 45, 34, 12, 40], label: "linkedin" },
+  { data: [35, 23, 56, 22, 97, 23, 64], label: "google" },
 ];
 
 const makeSocialBoxData = (dataSetNo) => {
   const dataset = socialBoxData[dataSetNo];
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        backgroundColor: 'rgba(255,255,255,.1)',
-        borderColor: 'rgba(255,255,255,.55)',
-        pointHoverBackgroundColor: '#fff',
+        backgroundColor: "rgba(255,255,255,.1)",
+        borderColor: "rgba(255,255,255,.55)",
+        pointHoverBackgroundColor: "#fff",
         borderWidth: 2,
         data: dataset.data,
         label: dataset.label,
@@ -267,7 +263,7 @@ const makeSocialBoxData = (dataSetNo) => {
 const socialChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   responsive: true,
   maintainAspectRatio: false,
@@ -278,11 +274,13 @@ const socialChartOpts = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     point: {
@@ -298,38 +296,46 @@ const socialChartOpts = {
 const sparkLineChartData = [
   {
     data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'New Clients',
+    label: "New Clients",
   },
   {
     data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Recurring Clients',
+    label: "Recurring Clients",
   },
   {
     data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'Pageviews',
+    label: "Pageviews",
   },
   {
     data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Organic',
+    label: "Organic",
   },
   {
     data: [78, 81, 80, 45, 34, 12, 40],
-    label: 'CTR',
+    label: "CTR",
   },
   {
     data: [1, 13, 9, 17, 34, 41, 38],
-    label: 'Bounce Rate',
+    label: "Bounce Rate",
   },
 ];
 
 const makeSparkLineData = (dataSetNo, variant) => {
   const dataset = sparkLineChartData[dataSetNo];
   const data = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    labels: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
     datasets: [
       {
-        backgroundColor: 'transparent',
-        borderColor: variant ? variant : '#c2cfd6',
+        backgroundColor: "transparent",
+        borderColor: variant ? variant : "#c2cfd6",
         data: dataset.data,
         label: dataset.label,
       },
@@ -341,7 +347,7 @@ const makeSparkLineData = (dataSetNo, variant) => {
 const sparklineChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   responsive: true,
   maintainAspectRatio: true,
@@ -349,11 +355,13 @@ const sparklineChartOpts = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -390,29 +398,58 @@ for (var i = 0; i <= elements; i++) {
 }
 
 const mainChart = {
-  labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+  labels: [
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su",
+  ],
   datasets: [
     {
-      label: 'My First dataset',
+      label: "My First dataset",
       backgroundColor: hexToRgba(brandInfo, 10),
       borderColor: brandInfo,
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: "#fff",
       borderWidth: 2,
       data: data1,
     },
     {
-      label: 'My Second dataset',
-      backgroundColor: 'transparent',
+      label: "My Second dataset",
+      backgroundColor: "transparent",
       borderColor: brandSuccess,
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: "#fff",
       borderWidth: 2,
       data: data2,
     },
     {
-      label: 'My Third dataset',
-      backgroundColor: 'transparent',
+      label: "My Third dataset",
+      backgroundColor: "transparent",
       borderColor: brandDanger,
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: "#fff",
       borderWidth: 1,
       borderDash: [8, 5],
       data: data3,
@@ -425,13 +462,16 @@ const mainChartOpts = {
     enabled: false,
     custom: CustomTooltips,
     intersect: true,
-    mode: 'index',
-    position: 'nearest',
+    mode: "index",
+    position: "nearest",
     callbacks: {
-      labelColor: function(tooltipItem, chart) {
-        return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
-      }
-    }
+      labelColor: function (tooltipItem, chart) {
+        return {
+          backgroundColor:
+            chart.data.datasets[tooltipItem.datasetIndex].borderColor,
+        };
+      },
+    },
   },
   maintainAspectRatio: false,
   legend: {
@@ -443,7 +483,8 @@ const mainChartOpts = {
         gridLines: {
           drawOnChartArea: false,
         },
-      }],
+      },
+    ],
     yAxes: [
       {
         ticks: {
@@ -452,7 +493,8 @@ const mainChartOpts = {
           stepSize: Math.ceil(250 / 5),
           max: 250,
         },
-      }],
+      },
+    ],
   },
   elements: {
     point: {
@@ -464,8 +506,6 @@ const mainChartOpts = {
   },
 };
 
-
-
 class Statistics extends Component {
   constructor(props) {
     super(props);
@@ -475,90 +515,79 @@ class Statistics extends Component {
 
     this.state = {
       dropdownOpen: false,
-      radioSelected: 2, 
-      files : [],
-      orders : [],
-      
-      data:{
+      radioSelected: 2,
+      files: [],
+      orders: [],
+
+      data: {
         // labels:[],
-        labels:[],
-        datasets:[{
-          label:'Revenue1',
-          backgroundColor:"rgba(255, 0, 255, 0.75)",
-          data:[4,5,1,12,45,32,7]
-        }
-      ],
-      // options: {
-      //   scales: {
-      //     xAxis:[
-      //       display= true,
-      //       type= 'time',
-      //       time= {
-      //         parser: 'MM/DD/YYYY HH:mm',
-      //         tooltipFormat: 'll HH:mm',
-      //         unit: 'day',
-      //         unitStepSize: 1,
-      //         displayFormats: {
-      //           'day': 'MM/DD/YYYY'
-      //         }
-      //       }
-      //     ]}}
-
-      }
-        
-
+        labels: [],
+        datasets: [
+          {
+            label: "Revenue1",
+            backgroundColor: "rgba(255, 0, 255, 0.75)",
+            data: [4, 5, 1, 12, 45, 32, 7],
+          },
+        ],
+        // options: {
+        //   scales: {
+        //     xAxis:[
+        //       display= true,
+        //       type= 'time',
+        //       time= {
+        //         parser: 'MM/DD/YYYY HH:mm',
+        //         tooltipFormat: 'll HH:mm',
+        //         unit: 'day',
+        //         unitStepSize: 1,
+        //         displayFormats: {
+        //           'day': 'MM/DD/YYYY'
+        //         }
+        //       }
+        //     ]}}
+      },
     };
   }
 
-   getChartdata = canvas =>{
+  getChartdata = (canvas) => {
     const data = this.state.data;
-     return data;
-   }
+    return data;
+  };
 
-  
-
-
-  componentDidMount=()=>{
-    axios.get("http://localhost:5000/orders")
-    .then( (response) => {
-     console.log("Response", response.data);
-     this.setState({
-      orders: response.data.reverse()
+  componentDidMount = () => {
+    axios
+      .get("http://localhost:5000/orders")
+      .then((response) => {
+        console.log("Response", response.data);
+        this.setState({
+          orders: response.data.reverse(),
+        });
       })
-  })  
-  .catch(function (error) {
-    console.log(error);
-  });
-  axios.get(`http://localhost:5000/files`)
-  .then((response) => {
-    console.log("Response", response.data);
-    this.setState({
-      files: response.data.reverse()
-    })
-   
-    })
-  .catch(function (error) {
-    console.log(error);
-  });
+      .catch(function (error) {
+        console.log(error);
+      });
+    axios
+      .get(`http://localhost:5000/files`)
+      .then((response) => {
+        console.log("Response", response.data);
+        this.setState({
+          files: response.data.reverse(),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-  // var date3 = [];
-       
-  // for (i = 29; i >=  0; i--) {
-  //  var date = new Date();
-  //  date.setDate(date.getDate() - i);
-  //  var dateString2 = date.toISOString().split('T')[0];
-  //   this.state.data.labels.push(dateString2)
-  //  console.log("date",i,":",dateString2)
+    // var date3 = [];
 
-  // }
-   
-   
+    // for (i = 29; i >=  0; i--) {
+    //  var date = new Date();
+    //  date.setDate(date.getDate() - i);
+    //  var dateString2 = date.toISOString().split('T')[0];
+    //   this.state.data.labels.push(dateString2)
+    //  console.log("date",i,":",dateString2)
 
-  }
-
- 
-
-
+    // }
+  };
 
   toggle() {
     this.setState({
@@ -572,150 +601,134 @@ class Statistics extends Component {
     });
   }
 
-  onClickAwaiting =()=>{
-    this.props.history.push('/awaiting')
+  onClickAwaiting = () => {
+    this.props.history.push("/awaiting");
+  };
 
-    
-  }
+  onClickProcessing = () => {
+    this.props.history.push("/processing");
+  };
+  onClickCompleted = () => {
+    this.props.history.push("/completed");
+  };
+  onClickFileError = () => {
+    this.props.history.push("/file-error");
+  };
 
-  onClickProcessing=()=>{
-    this.props.history.push('/processing')
-  }
-  onClickCompleted =()=>{
-    this.props.history.push('/completed')
-  }
-   
-
-
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+  loading = () => (
+    <div className="animated fadeIn pt-1 text-center">Loading...</div>
+  );
 
   render() {
-    var Total = 0
-    var SubTotal = 0
-    var Tax = 0
-    var Shipping = 0
-    var NumberOfOrder = 0
-    var NumberOfUploads = 0
-    var NumberOfPrints = 0
-    var NumberOfPaidFiles = 0
-    var NumberofAwaiting = 0
-    var NumberofProcessing = 0
-    var NumberofComplete = 0
+    var Total = 0;
+    var SubTotal = 0;
+    var Tax = 0;
+    var Shipping = 0;
+    var NumberOfOrder = 0;
+    var NumberOfUploads = 0;
+    var NumberOfPrints = 0;
+    var NumberOfPaidFiles = 0;
+    var NumberofAwaiting = 0;
+    var NumberofProcessing = 0;
+    var NumberofComplete = 0;
+    var NumberofFileError = 0;
 
+    console.log("render orders:", this.state.orders);
+    console.log("render files:", this.state.files);
 
-   console.log('render orders:',this.state.orders)
-   console.log('render files:',this.state.files)
-
-   this.state.orders.map(order =>{
-     if((order.order_placed == true)){
-        NumberOfOrder = NumberOfOrder +1
-        Total = Total+ order.orderTotal
-        SubTotal = SubTotal + order.subTotal
-        Tax = Tax + order.tax
-        
-        if(order.shippingCharge !== undefined){
-         Shipping = Shipping + order.shippingCharge
-        }
-        
-       console.log('order after condition:',order)
-     }
-    if(order.uploadLength !== undefined){NumberOfUploads = NumberOfUploads + order.uploadLength}
-       
-     })
-
-     this.state.files.map(file =>{
-       NumberOfUploads = NumberOfUploads + 1
-     })
-
-     this.state.orders.map(order =>{
-
-        if((order.order_placed == true)) {
-         if((order.shipping_status != 'Shipped' ) && (order.shipping_status !== 'Delivered') && (order.print_status !== 'Awaiting Confirmation') ){
-          
-           NumberofProcessing = NumberofProcessing + 1;
-         }
-         if((order.shipping_status != 'Shipped' ) && (order.shipping_status !== 'Delivered') && (order.print_status === 'Awaiting Confirmation') ){
-           NumberofAwaiting =  NumberofAwaiting + 1;
-         }
-         if((order.shipping_status == 'Shipped' ) || (order.shipping_status == 'Delivered')){
-           NumberofComplete =  NumberofComplete +1;
-         }
-
-
+    this.state.orders.map((order) => {
+      if (order.order_placed == true) {
+        NumberOfOrder = NumberOfOrder + 1;
+        Total = Total + order.orderTotal;
+        if (order.subTotal) {
+          SubTotal = SubTotal + order.subTotal;
+          Tax = Tax + order.tax;
         }
 
-      
-       
-        
-       
-     })
+        if (order.shippingCharge !== undefined) {
+          Shipping = Shipping + order.shippingCharge;
+        }
 
+        console.log("order after condition:", order);
+      }
+      if (order.uploadLength !== undefined) {
+        NumberOfUploads = NumberOfUploads + order.uploadLength;
+      }
+    });
 
+    this.state.files.map((file) => {
+      NumberOfUploads = NumberOfUploads + 1;
+    });
 
+    this.state.orders.map((order) => {
+      if (order.order_placed == true) {
+        if (
+          order.shipping_status !== "Shipped" &&
+          order.shipping_status !== "Delivered" &&
+          order.print_status !== "Awaiting Confirmation" &&
+          order.print_status !== "File Error"
+        ) {
+          NumberofProcessing = NumberofProcessing + 1;
+        }
+        if (
+          order.shipping_status !== "Shipped" &&
+          order.shipping_status !== "Delivered" &&
+          order.print_status === "File Error"
+        ) {
+          NumberofFileError = NumberofFileError + 1;
+        }
+        if (
+          order.shipping_status !== "Shipped" &&
+          order.shipping_status !== "Delivered" &&
+          order.print_status === "Awaiting Confirmation"
+        ) {
+          NumberofAwaiting = NumberofAwaiting + 1;
+        }
+        if (
+          order.shipping_status == "Shipped" ||
+          order.shipping_status == "Delivered"
+        ) {
+          NumberofComplete = NumberofComplete + 1;
+        }
+      }
+    });
 
+    //     this.state.orders.map(order =>{
+    //      if(order.order_placed == true){
+    //        NumberOfPaidFiles = NumberOfPaidFiles + order.uploadLength
+    //          if(order.created_at !== undefined){
+    //            var date = order.created_at;
 
+    //            var nameArr = date.split(',');
+    //  } }
+    //      this.state.files.map(file =>{
+    //         if(order.order_id == file.orderId){
 
-      this.state.orders.map(order =>{
-       if(order.order_placed == true){
-         NumberOfPaidFiles = NumberOfPaidFiles + order.uploadLength
-           if(order.created_at !== undefined){
-             var date = order.created_at;
-             // console.log('date1:',date);
-             var nameArr = date.split(',');
-             // console.log('nameArr[0]',nameArr[0]);
-     
-            //  var d = new Date(nameArr[0]);
-            //  d.setDate(d.getDate());
-            //  var dateString = d.toISOString().split('T')[0];
-            //  console.log('dateString:',dateString);
+    //                if(order.order_placed == true){
 
+    //                  if(file.quantity !== undefined){
 
+    //                    NumberOfPrints = NumberOfPrints + file.quantity
+    //                   }
+    //                }
+    //         }
 
+    //      })
+    //     })
 
-
-             // function convert(str) {
-             //   var date = new Date(str),
-             //     mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-             //     day = ("0" + date.getDate()).slice(-2);
-             //   return [date.getFullYear(), mnth, day].join("-");
-             // } 
-              
-
-             //  var da = new Date(convert(d).replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"))
-
-
-          } }
-       this.state.files.map(file =>{
-          if(order.order_id == file.orderId){
-           //  console.log('matched order id:',file.order_id)
-                 if(order.order_placed == true){
-                   
-                   if(file.quantity !== undefined){
-                     
-                     NumberOfPrints = NumberOfPrints + file.quantity
-                    }
-                 }
-          }
-
-       })
-      })
-      
-
-
-
-   console.log('Total:',Total)
-   console.log('subTotal:',SubTotal)
-   console.log('Tax:',Tax)
-   console.log('Shipping:',Shipping)
-   console.log('NumberOfOrder:',NumberOfOrder)
-   console.log('NumberOfUploads:',NumberOfUploads)
-   console.log('NumberOfPrints:',NumberOfPrints)
-   console.log('NumberOfPaidFiles:',NumberOfPaidFiles)
-   console.log('NumberofAwaiting',NumberofAwaiting);
-   console.log('NumberofProcessing',NumberofProcessing);
-   console.log('NumberofComplete',NumberofComplete);
-   // console.log('date3:',date3) 
-   return (
+    console.log("Total:", Total);
+    console.log("subTotal:", SubTotal);
+    console.log("Tax:", Tax);
+    console.log("Shipping:", Shipping);
+    console.log("NumberOfOrder:", NumberOfOrder);
+    console.log("NumberOfUploads:", NumberOfUploads);
+    console.log("NumberOfPrints:", NumberOfPrints);
+    console.log("NumberOfPaidFiles:", NumberOfPaidFiles);
+    console.log("NumberofAwaiting", NumberofAwaiting);
+    console.log("NumberofProcessing", NumberofProcessing);
+    console.log("NumberofComplete", NumberofComplete);
+    // console.log('date3:',date3)
+    return (
       // <div>
 
       //   <div style={{position:"relative",width:1000, height:500}}>
@@ -749,35 +762,24 @@ class Statistics extends Component {
       //         }
       //     }]
       // }
-      //     }} 
-
-        
-
-
-
+      //     }}
 
       //      data = {this.getChartdata}
-         
+
       //    />
 
       //   </div>
-        
+
       // </div>
-
-
-
-
 
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
-               
                 <div className="text-value">
-                {/* 9.823 */}
-                
-                ₹{Total}</div>
+                  {/* 9.823 */}₹{Total}
+                </div>
                 <div>Total Revenue</div>
               </CardBody>
               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
@@ -789,7 +791,6 @@ class Statistics extends Component {
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
-                 
                 <div className="text-value">₹{SubTotal}</div>
                 <div>Total SubTotal</div>
               </CardBody>
@@ -802,7 +803,6 @@ class Statistics extends Component {
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-warning">
               <CardBody className="pb-0">
-                 
                 <div className="text-value">₹{Tax}</div>
                 <div>Tax</div>
               </CardBody>
@@ -812,12 +812,9 @@ class Statistics extends Component {
             </Card>
           </Col>
 
-               
-
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-danger">
               <CardBody className="pb-0">
-                 
                 <div className="text-value">₹{Shipping}</div>
                 <div>Shipping</div>
               </CardBody>
@@ -828,16 +825,15 @@ class Statistics extends Component {
           </Col>
         </Row>
 
-
         <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
-               
                 <div className="text-value">
-                {/* 9.823 */}
-                
-                {NumberOfOrder}</div>
+                  {/* 9.823 */}
+
+                  {NumberOfOrder}
+                </div>
                 <div>Total Orders</div>
               </CardBody>
               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
@@ -849,57 +845,33 @@ class Statistics extends Component {
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
-                 
                 <div className="text-value">{NumberOfUploads}</div>
                 <div>Total Uploaded Files</div>
               </CardBody>
-              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
-              </div> */}
             </Card>
           </Col>
 
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-warning">
+            <Card className="text-white bg-info">
               <CardBody className="pb-0">
-                 
-                <div className="text-value">{NumberOfPrints}</div>
-                <div>Total Prints</div>
-              </CardBody>
-              {/* <div className="chart-wrapper" style={{ height: '70px' }}>
-                <Line data={cardChartData3} options={cardChartOpts3} height={70} />  
-              </div> */}
-            </Card>
-          </Col>
-          
-
-          <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-danger">
-              <CardBody className="pb-0">
-                 
-                <div className="text-value">{NumberOfPaidFiles}</div>
-                <div>No.of Files in Orders</div>
-              </CardBody>
-              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-              </div> */}
-            </Card>
-          </Col>
-      </Row>
-
-        <Row>
-        <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-info" >
-              <CardBody className="pb-0">
-                 <ButtonGroup className="float-right" onClick={this.onClickAwaiting} style={{cursor:"pointer"}}>
-                <span><Button block color="secondary" style={{width:"90px"}}>View</Button></span>
+                <ButtonGroup
+                  className="float-right"
+                  onClick={this.onClickAwaiting}
+                  style={{ cursor: "pointer" }}
+                >
+                  <span>
+                    <Button block color="secondary" style={{ width: "90px" }}>
+                      View
+                    </Button>
+                  </span>
                 </ButtonGroup>
                 <div className="text-value">
-                {/* 9.823 */}
-                 {NumberofAwaiting}</div>
+                  {/* 9.823 */}
+                  {NumberofAwaiting}
+                </div>
                 <div> New Orders</div>
-               </CardBody>
-               {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+              </CardBody>
+              {/* <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData2} options={cardChartOpts2} height={70} />
               </div> */}
             </Card>
@@ -908,11 +880,18 @@ class Statistics extends Component {
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
-
-               <ButtonGroup className="float-right" onClick={this.onClickProcessing} style={{cursor:"pointer"}}>
-                <span><Button block color="secondary" style={{width:"90px"}}>View</Button></span>
+                <ButtonGroup
+                  className="float-right"
+                  onClick={this.onClickProcessing}
+                  style={{ cursor: "pointer" }}
+                >
+                  <span>
+                    <Button block color="secondary" style={{ width: "90px" }}>
+                      View
+                    </Button>
+                  </span>
                 </ButtonGroup>
-                 
+
                 <div className="text-value">{NumberofProcessing}</div>
                 <div>Processing Orders</div>
               </CardBody>
@@ -922,14 +901,69 @@ class Statistics extends Component {
             </Card>
           </Col>
 
+          {/* <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-warning">
+              <CardBody className="pb-0">
+                 
+                <div className="text-value">{NumberOfPrints}</div>
+                <div>Total Prints</div>
+              </CardBody>
+             
+            </Card>
+          </Col>
+           */}
+
+          {/* <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-danger">
+              <CardBody className="pb-0">
+                 
+                <div className="text-value">{NumberOfPaidFiles}</div>
+                <div>No.of Files in Orders</div>
+              </CardBody>
+          
+            </Card>
+          </Col> */}
+        </Row>
+
+        <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-warning">
               <CardBody className="pb-0">
-
-               <ButtonGroup className="float-right" onClick={this.onClickCompleted} style={{cursor:"pointer"}}>
-                <span><Button block color="secondary" style={{width:"90px"}}>View</Button></span>
+                <ButtonGroup
+                  className="float-right"
+                  onClick={this.onClickFileError}
+                  style={{ cursor: "pointer" }}
+                >
+                  <span>
+                    <Button block color="secondary" style={{ width: "90px" }}>
+                      View
+                    </Button>
+                  </span>
                 </ButtonGroup>
-                 
+
+                <div className="text-value">{NumberofFileError}</div>
+                <div>File Error </div>
+              </CardBody>
+              {/* <div className="chart-wrapper" style={{ height: '70px' }}>
+                <Line data={cardChartData3} options={cardChartOpts3} height={70} />  
+              </div> */}
+            </Card>
+          </Col>
+          <Col xs="12" sm="6" lg="3">
+            <Card className="text-white bg-warning">
+              <CardBody className="pb-0">
+                <ButtonGroup
+                  className="float-right"
+                  onClick={this.onClickCompleted}
+                  style={{ cursor: "pointer" }}
+                >
+                  <span>
+                    <Button block color="secondary" style={{ width: "90px" }}>
+                      View
+                    </Button>
+                  </span>
+                </ButtonGroup>
+
                 <div className="text-value">{NumberofComplete}</div>
                 <div>Completed Orders </div>
               </CardBody>
@@ -938,17 +972,7 @@ class Statistics extends Component {
               </div> */}
             </Card>
           </Col>
-          </Row>
-
-
-
-
-
-
-
-
-
-
+        </Row>
 
         {/* <Row>
           <Col>

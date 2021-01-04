@@ -37,15 +37,21 @@
   
   
   }
-
-
-
-  
-  
-    
-
- 
-
 .a1:hover .tooltiptext {
     visibility: visible;
+  }
+
+  .pay-button{
+    border:none;
+    padding:5px 20px;
+    background-color:red; 
+    color: white;
+  }
+
+  .pay-button:active,
+  .pay-button:visited,
+  .pay-button:focus
+  {
+    border:0;
+    outline: 0;
   }

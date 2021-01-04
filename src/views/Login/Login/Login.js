@@ -43,16 +43,21 @@ class UserLogin extends Component {
   
 
  submitHandler = () => {
-      // axios.get("http://localhost:5000/facebook//auth/google")
-      fetch(`http://localhost:5000/facebook/login`,{mode: 'no-cors'})
-      .then((response)=>{
+
+  
+      // axios.get("http://localhost:5000/facebook/auth/google")
+      // fetch(`http://localhost:5000/facebook/login`,{mode: 'no-cors'})
+      // .then((response)=>{
+
         // console.log("response",response)
           // console.log('login detail:',response)
         // this.setState({
         //   login:response.data.login,
         //   msg:response.data.info.message
         // })
-      })
+
+
+      // })
 
 //       var url = 'http://localhost:5000/facebook/login';
 // fetch(url, {
@@ -85,6 +90,7 @@ class UserLogin extends Component {
                  <div><img src="https://www.3ding.in/img/3d.png"/></div>
                   <h4>Welcome to 3ding </h4><br/><br/>
                  <Button className="btn-google-plus btn-brand mr-1 mb-1" href="http://localhost:5000/facebook/auth/google"><i className="fa fa-google-plus"></i><span>Google+</span></Button>
+                 {/* <Button className="btn-google-plus btn-brand mr-1 mb-1" onClick={this.submitHandler} ><i className="fa fa-google-plus"></i><span>Google+</span></Button> */}
               </CardBody>
             </Card>
           </Col>

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from "reactstrap";
-import { Route, Router, NavLink } from "react-router-dom";
+import { Route, Router, NavLink, Redirect } from "react-router-dom";
 // import FileEdit from './file-edit';
 import axios from "axios";
 
-var p_id = null;
+var e_id = null;
 var order_plced = "";
-class Processing extends Component {
+class FileError extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,8 +37,8 @@ class Processing extends Component {
       });
   }
 
-  create_click_id = (order_id) => {
-    p_id = order_id;
+  create_click_id = async (order_id) => {
+    e_id = order_id;
 
     console.log("this id clicked", order_id);
     this.setState({
@@ -49,8 +49,8 @@ class Processing extends Component {
   render() {
     {
       this.state.orders.map((order) => {
-        console.log("p_id:", p_id, "order_placed", order.order_placed);
-        console.log("p_id:", p_id);
+        console.log("e_id:", e_id, "order_placed", order.order_placed);
+        console.log("e_id:", e_id);
       });
     }
 
@@ -80,21 +80,21 @@ class Processing extends Component {
                         order.shipping_status != "Shipped" &&
                         order.shipping_status !== "Delivered" &&
                         order.print_status !== "Awaiting Confirmation" &&
-                        order.print_status !== "File Error"
+                        order.print_status === "File Error"
                       ) {
                         return (
                           <tr key={order._id}>
                             <td>
                               <NavLink
                                 to="/file-edit"
-                                onClick={() =>
-                                  this.create_click_id(order.order_id)
-                                }
+                                onClick={() => {
+                                  this.create_click_id(order.order_id);
+                                }}
                               >
                                 {order.order_id}
                               </NavLink>
                             </td>
-                            {/* <td onClick={()=> this.create_click_id(order.order_id)}>{order.order_id}</td> */}
+                            {/* <td onClick={()=> this.create_click_id(order.order_id)}>{order.order_id}</td> File Error*/}
                             <td>{order.created_at}</td>
                             <td>{order.name}</td>
                             <td>{order.orderTotal}</td>
@@ -102,10 +102,8 @@ class Processing extends Component {
                               <td>
                                 {order.shipping_status != "Shipped" &&
                                   order.shipping_status !== "Delivered" &&
-                                  order.print_status !==
-                                    "Awaiting Confirmation" &&
-                                  order.print_status !== "File Error" && (
-                                    <Badge color="warning">Processing</Badge>
+                                  order.print_status === "File Error" && (
+                                    <Badge color="dark">File Error</Badge>
                                   )}
                                 {order.shipping_status != "Shipped" &&
                                   order.shipping_status !== "Delivered" &&
@@ -133,5 +131,5 @@ class Processing extends Component {
     );
   }
 }
-export { p_id };
-export default Processing;
+export { e_id };
+export default FileError;

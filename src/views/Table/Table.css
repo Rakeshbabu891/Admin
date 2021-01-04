@@ -1,0 +1,21 @@
+#feedbackStar{
+    color:orange;
+}
+#StarColor{
+    color:#dedbd5;
+}
+
+.unpay-button{
+    border:none;
+    padding:5px 20px;
+    background-color:gainsboro; 
+    color: gray;
+  }
+
+  .unpay-button:active,
+  .unpay-button:visited,
+  .unpay-button:focus
+  {
+    border:0;
+    outline: 0;
+  }

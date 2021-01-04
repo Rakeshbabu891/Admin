@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Button,InputGroup,Input } from 'reactstrap';
 import { Route, Router, NavLink } from "react-router-dom";
 import { c_id } from './Upload';
 import axios from 'axios';
@@ -30,7 +30,7 @@ var external_access = false
 
 var Process= {
   value: "fdm",
-  label: "FDM/FFF"
+  label: "FDM/FFF" 
 }
 var Material= {
   value: "fdm-pla",
@@ -57,7 +57,8 @@ var Quantity={
 const customStyles = {
   container: (provided, state) => ({
     ...provided,
-    fontSize: 13
+    fontSize: 13,
+    width:"110px"
     // overflow: "visible"
   })
 };
@@ -146,10 +147,17 @@ this.state = {
   },
   customized_details :{
     customized_email:"",
-    customized_mobile:""
-  }
- 
-
+    customized_mobile:"",
+    customized_name:""
+  },
+  order_details :{
+     subTotal :"",
+     tax :"",
+     shippingCharge :"",
+     orderTotal :""
+  },
+  custom_amount:"",
+  flag:false
 
 }
       
@@ -191,7 +199,16 @@ this.state = {
            Shipping_status: order.shipping_status,
           Tracking_Number: order.tracking_number
           };
-          this.setState({ status: newStatus });
+
+          const { customized_details } = this.state;
+          const newcustomizedDetails = {
+            ...customized_details,
+            customized_email:order.email,
+            customized_mobile:order.mobile,
+            customized_name:order.name
+          };
+         this.setState({customized_details: newcustomizedDetails });
+
  })}
 
       })
@@ -211,6 +228,7 @@ this.state = {
         console.log(error);
       });
       this.getFiles();
+      this.setDefaultCustomizedDetails();
 
     // axios.get(`http://localhost:5000/process`)
     //   .then((response) => {
@@ -276,6 +294,23 @@ this.state = {
     console.log('material:', event.target.value)
     this.setState({ material_value: event.target.value });
   }
+  setDefaultCustomizedDetails = () =>{
+    this.state.orders.map(order => {
+        if((order.name === undefined || order.name === null)  ){
+             this.state.customized_details.customized_name ="Customer";
+        }
+        if((order.email === undefined || order.email === null)){
+          this.state.customized_details.customized_email ="";
+        }
+        if((order.mobile === undefined || order.mobile === null)){
+          this.state.customized_details.customized_mobile ="";
+        }
+        if((order.request_comment === undefined || order.request_comment === null)){
+          order.request_comment ="";
+        }
+      
+    })
+  }
 
 
 
@@ -291,19 +326,28 @@ this.state = {
 
 
 
-  // updateOrder = () => {
-  //   axios.patch(`http://localhost:5000/orders/${c_id}`, this.state.status)
-  //     .then((response) => {
-  //       alert("changes updated successfully");
-  //       console.log("After updating message", response.data);
+  saveDetails = () => {
+    axios.post(`http://localhost:5000/orders/updateCustomizedDetails/${c_id}`, this.state.customized_details)
+      .then((response) => {
+        alert("customer details updated successfully");
+        console.log("After updating message", response.data);
         
 
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //       alert("changes can not be updated");
-  //     });
-  // }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert(" customer details can not be updated");
+      });
+
+
+      axios.post(`http://localhost:5000/files/customFile/${c_id}`, this.state)
+      .then((response) => {
+     })
+      .catch(function (error) {
+        console.log(error);
+        alert("file change can not be updated");
+      });
+  }
 
   // sendemail=()=>{
   //   axios.post(`http://localhost:5000/mail/${c_id}`,this.state.status)
@@ -350,7 +394,7 @@ this.state = {
 
 
   //Write to DB
-  updateOrder() {
+  updateOrder= () => {
     // var index = filesArray.findIndex(file => file._id === fileId);
     console.log("Writing Order to DB");
     filesArray.forEach(file => {
@@ -371,6 +415,28 @@ this.state = {
           console.log(resData);
         });
     });
+
+
+
+    axios.post(`http://localhost:5000/orders//orderUpdate/${c_id}`, this.state.order_details)
+    .then((response) => {
+      console.log("orderUpdadte",response);
+   }) 
+    .catch(function (error) {
+      console.log(error);
+      // alert("file change can not be updated");
+    });
+
+
+    
+  //   axios.post(`http://localhost:5000/files/customFile/${c_id}`, this.state)
+  //   .then((response) => {
+  //  })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+
+
    
   }
 
@@ -457,6 +523,18 @@ this.state = {
       if (file.quantity === undefined) {
         file.quantity = 1;
       }
+
+      if(file.custom_flag === false || file.custom_flag === undefined || file.custom_flag === null ){
+            file.custom_amount = "";
+      }
+
+      
+
+      // if(file.custom_amount === undefined){
+      //   file.custom_amount = ""; 
+      // }
+
+
 
    
     }
@@ -576,20 +654,62 @@ this.state = {
         index => index.value === file.density
       ).densityMultiplier;
 
-      file.price = Math.round(
-        file.volume *
+      if(file.process === 'sls'){
+        if(Math.round(file.volume) <= 25){
+          file.price = 1300
+        }else if(Math.round(file.volume) >= 25 && Math.round(file.volume) <= 100 ){
+          file.price =  Math.round(file.volume) * 52
+        }else{
+          file.price =  Math.round(file.volume) * 45
+        }  
+      }else if(file.process === 'sla' && (Math.round(file.volume) <= 10)){
+        if(Math.round(file.volume) <= 10){
+          file.price = 1500
+        }}
+
+        else if((file.process === 'mjf' || file.process === 'dlp'|| file.process === 'mjp' || file.process === 'pjp') &&((Math.round(file.volume) <= 10)) ){
+          if(Math.round(file.volume) <= 10){
+            file.price = 2000
+          }}
+      
+      else if((file.process === 'fdm') && (file.dimensions[0] >= 300 || file.dimensions[1] >= 300 || file.dimensions[2] >= 300 )){
+        file.price = Math.round(
+          file.volume *
           file.materialPrice *
           file.qualityMultiplier *
           file.densityMultiplier
-      );
+        ) *2;
+      }
+      else{
+        file.price = Math.round(
+            file.volume *
+            file.materialPrice *
+            file.qualityMultiplier *
+            file.densityMultiplier
+        );
+      }
 
        
 
-      file.itemTotal = file.price * file.quantity;
-      if((file.itemTotal > 0) && (file.itemTotal < 100)){
-        file.price=100;
-        file.itemTotal = 100
-      }
+      
+
+      if( file.custom_amount === "" || file.custom_amount === 0 || 
+      file.custom_amount === null || file.custom_amount === undefined || file.custom_amount === NaN  ){
+        file.itemTotal = file.price * file.quantity;
+        console.log("condition1");
+        if((file.itemTotal > 0) && (file.itemTotal < 150)){
+          file.price=150;
+          file.itemTotal = 150
+        }
+     }else{
+      console.log("condition2");
+        file.itemTotal = file.custom_amount* file.quantity;
+       
+       }
+
+     
+
+      
       subTotal += file.itemTotal;
       shippingCharge = 0;
       console.log(
@@ -605,20 +725,43 @@ this.state = {
 
     tax = Math.round((subTotal * 18) / 100);
 
-    if((subTotal <500) && (subTotal > 0) ){
-      shippingCharge = 100;
+    if((subTotal <1000) && (subTotal > 0) ){
+      
+      this.state.orders.forEach((cur)=>{
+        if(cur.selfpickup){
+          shippingCharge = 0;
+        }else{
+          shippingCharge = 150;
+        }
+      })
+     
+      
       orderTotal = subTotal + tax + shippingCharge;
     }
     else{
       orderTotal = subTotal + tax;
     }
      
+    // const {order_details} = this.state;
+    // const newOrderDetails ={
+    //   ...order_details,
+    //   subTotal : subTotal,
+    //   tax :tax,
+    //   shippingCharge :shippingCharge,
+    //   orderTotal :orderTotal
+    // }
+    // this.setState({order_details: newOrderDetails });
+  
+    this.state.order_details.subTotal = subTotal;
+    this.state.order_details.tax =tax;
+    this.state.order_details.shippingCharge =shippingCharge;
+    this.state.order_details.orderTotal =orderTotal
      
     console.log("Sub Total", subTotal);
     console.log("Tax", tax);
     console.log("Total", orderTotal);
     console.log("Order Data", filesArray);
- 
+    
 
     this.setState({
       state: this.state
@@ -639,6 +782,21 @@ this.state = {
     this.setState({ customized_details: newCustomer });
 }
 
+customAmountHandler =(ArrayIndex)=> (event) =>{
+   
+  if( event.target.value !== "" && event.target.value !== 0 && event.target.value !== NaN && event.target.value !== undefined){
+    var value =  parseInt(event.target.value, 10);
+    this.state.filesArray[ArrayIndex].custom_amount=value
+    this.state.filesArray[ArrayIndex].custom_flag = true
+    this.calculatePrice();
+    this.setState({ flag: true });
+  }else{
+    this.state.filesArray[ArrayIndex].custom_amount=""
+    this.state.filesArray[ArrayIndex].custom_flag = false 
+    this.calculatePrice();
+    this.setState({ flag: false });
+  }
+}
 
 
 
@@ -646,9 +804,12 @@ this.state = {
 
 
   render() {
-    console.log('this.state.customized_details', this.state.customized_details);
+
+    
+     
     console.log('c_id from file edit', c_id);
-    console.log('Print_status', this.state.status.Print_status);
+    
+    console.log('fileArray',  this.state.filesArray);
     // {this.state.orders.map(order => {
     //    console.log("order.payment_data[0].status",order.payment_data[0].status)
     // })}
@@ -662,7 +823,7 @@ this.state = {
             <h5>Email</h5>
             
               <input key={order._id} type="text" defaultValue={order.email} style={{ width: '100%' }} />
-            
+             
             <Row>
               <Col xs="12" lg="12">
 
@@ -671,6 +832,7 @@ this.state = {
                   <div className="card-body">
                     <div className="bd-example">
                       <dl className="row">
+                       
                         <dt className="col-sm-7">Created Date</dt>
                         <dd className="col-sm-5"> {this.state.orders.map(order => {
                           return <div>{order.created_at}</div>
@@ -837,19 +999,36 @@ this.state = {
                  <Col xs="12" lg="4">
                   <h5>Email</h5>
                   {this.state.orders.map(order => {
-                    return  <input  type="text" name="customized_email" onChange={this.inputChangerHandler('customized_email')} defaultValue="" style={{ width: '100%' }} />
+                    return  <input  type="text" name="customized_email" onChange={this.inputChangerHandler('customized_email')} defaultValue={this.state.customized_details.customized_email} style={{ width: '100%' }} />
                   })}
                  
                  </Col>
                  <Col xs="12" lg="4">
                   <h5>Mobile</h5>
                   {this.state.orders.map(order => {
-                    return  <input  type="text" name="customized_mobile" onChange={this.inputChangerHandler('customized_mobile')}  defaultValue="" style={{ width: '100%' }} />
+                    return  <input  type="text" name="customized_mobile" onChange={this.inputChangerHandler('customized_mobile')}  defaultValue={this.state.customized_details.customized_mobile} style={{ width: '100%' }} />
+                  })}
+                 
+                 </Col>
+
+                  <Col xs="12" lg="4">
+                  <h5>Name</h5>
+                  {this.state.orders.map(order => {
+                    return  <input  type="text" name="customized_name" onChange={this.inputChangerHandler('customized_name')}  defaultValue={this.state.customized_details.customized_name} style={{ width: '100%' }} />
                   })}
                  
                  </Col>
 
                 </Row>
+                <br/>
+                <Row>
+                <Col xs="12" lg="4">
+                <h5>Comment</h5>
+                  {this.state.orders.map(order => {
+                    return  <textarea  type="text" name="customized_comment"    defaultValue={order.request_comment} style={{ width: '100%' }} />
+                  })}
+                </Col>
+                  </Row>
                 <br/><br/>
             </div>
         }})}
@@ -951,7 +1130,7 @@ this.state = {
 
 
 
-                <Table responsive align="center" responsive>
+                <Table align="center" responsive>
               <thead>
                 <tr align="center">
                   <th className="align-middle">#</th>
@@ -995,6 +1174,10 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                   <th className="align-middle" align="center">
                     Price
                   </th>
+                  <th className="align-middle" align="center">
+                    Custom Amount
+                  </th>
+
                   <th className="align-middle" align="center" width="5%">
                     Quantity
                   </th>
@@ -1004,17 +1187,17 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                 </tr>
               </thead>
               <tbody>
-                {this.state.filesArray.map(file => (
+                {this.state.filesArray.map((file,ArrayIndex) => (
                     
 
                    
                       
-                    (file.process !== undefined) ? 
-                    Process= {
-                      value: file.process,
-                      label: file.processLabel  
-                    }:
-                    process=this.state.defaultProcess,
+                    // (file.process !== undefined) ? 
+                    // Process= {
+                    //   value: file.process,
+                    //   label: file.processLabel  
+                    // }:
+                    // process=this.state.defaultProcess,
                     (file.material !== undefined) ? 
                     Material= {
                       value: file.material,
@@ -1066,14 +1249,16 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                     {/*  */}
                     {/*  */}
 
-                    <td className="align-middle" align="left">
-                      {file.fileName}
+                    <td>
+                    {/* className="align-middle" align="left" */}
+                      {/* {file.fileName}
                       <div style={{ fontSize: 12 }}>
                         {Math.round(file.dimensions[0])}*
                         {Math.round(file.dimensions[1])}*
                         {Math.round(file.dimensions[2])} mm
-                        {/* {Math.round(file.volume)} cc */}
-                      </div>
+                         
+                      </div> */}
+                      <a href={"https://tus-server-file.s3.ap-south-1.amazonaws.com/" + file.fileId}  >{file.fileName}</a >
                     </td>
 
                     {/*  */}
@@ -1127,7 +1312,7 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                       <Select
                         theme={theme => ({
                           ...theme,
-                          borderRadius: 0
+                          borderRadius: 0 
                         })}
                         styles={customStyles}  
                         style={{fontSize:"12px"}}
@@ -1173,7 +1358,7 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                     {/*  */}
                     {/*  */}
 
-                    <td className="align-middle" align="center">
+                    <td className="align-middle" align="center" responsive>
                       <Select
                         theme={theme => ({
                           ...theme,
@@ -1324,6 +1509,15 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
                       &#8377; {file.price}
                     </td>
 
+                     <td className="align-middle" align="right">
+                    <InputGroup style={{width:"90px"}}>
+                      <Input placeholder="Amount"  defaultValue={file.custom_amount}
+                       onChange={this.customAmountHandler(ArrayIndex)}
+                         
+                       />
+                    </InputGroup>
+                    </td>
+
                     {/*  */}
                     {/*  */}
                     {/*  */}
@@ -1429,8 +1623,8 @@ The infill percentage inside a print - Contributes to the strength. 20% is the d
         <Table>
           <Row>
             <Col sm="6"></Col>
-            <Col sm="2"><Button block color="success" onClick={this.sendemail} > Save and Send </Button></Col>
-            <Col sm="2"><Button block color="success" onClick={this.updateOrder}>Save</Button></Col>
+            <Col sm="2"><Button block color="success" onClick={this.sendemail} > Send Quote </Button></Col>
+            <Col sm="2"><Button block color="success" onClick={this.saveDetails}>Save</Button></Col>
             <Col sm="2"><Button block color="primary" >Cancel</Button></Col>
           </Row>
         </Table>
